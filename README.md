@@ -38,7 +38,7 @@ Long way:
 
 
 ### Usage
-Clean rust projects folder:
+Encrypt/Decrypt rust projects folder:
 
     encdec --help
     encdec encrypt /path/to/folder
