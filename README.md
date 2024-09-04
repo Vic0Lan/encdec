@@ -1,6 +1,6 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-rust.svg)](https://forthebadge.com)
 
-# encdec
+# Encdec
 Simple CLI file encrypter written in Rust
 
 ## Getting Started
