@@ -1,12 +1,12 @@
 use chacha20poly1305::{aead::Aead, ChaCha20Poly1305, KeyInit};
 use std::error::Error;
 use std::path::PathBuf;
-use std::thread;
 use std::{
     fs::{self, File},
     io::Error as ioError,
     io::Read,
 };
+use std::{process, thread};
 
 #[derive(Clone, Copy)]
 pub enum Operation {
@@ -15,19 +15,19 @@ pub enum Operation {
 }
 
 pub fn start(path: &PathBuf, op: Operation) {
-    if !path.is_dir() {
-        println!("Sorry but i need a folder path");
+    if let Err(err) = read_yek() {
+        eprintln!("Error while checking yek: {}", err);
+        process::exit(1)
+    }
+
+    if let Err(err) = read_nuo() {
+        eprintln!("Error while checking nuo: {}", err);
+        process::exit(1)
+    }
+
+    if path.is_file() {
+        read_and_do(path.to_path_buf(), op);
         return;
-    }
-
-    match read_yek() {
-        Ok(_) => (),
-        Err(err) => eprintln!("Error while reading yek: {}", err),
-    }
-
-    match read_nuo() {
-        Ok(_) => (),
-        Err(err) => eprintln!("Error while reading nuo: {}", err),
     }
 
     let mut handlers = Vec::new();
@@ -48,7 +48,9 @@ pub fn start(path: &PathBuf, op: Operation) {
     }
 
     for thread in handlers {
-        thread.join().unwrap()
+        thread.join().unwrap_or_else(|err| {
+            eprintln!("Thread had a problem: {:?}", err);
+        })
     }
 }
 

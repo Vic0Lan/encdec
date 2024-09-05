@@ -10,12 +10,12 @@ pub fn parse_arguments() -> (PathBuf, Operation) {
         .before_help("To work, encdec needs to be in the same folder with the nuo and yek files")
         .subcommand(
             Command::new("encrypt")
-                .about("Encrypts the files of the given folder")
+                .about("Encrypts a file or the files in a folder")
                 .arg(arg!([PATH]).value_parser(value_parser!(PathBuf))),
         )
         .subcommand(
             Command::new("decrypt")
-                .about("Decrypts the files of the given folder")
+                .about("Decrypts a file or the files in a folder")
                 .arg(arg!([PATH]).value_parser(value_parser!(PathBuf))),
         )
         .get_matches();
