@@ -38,9 +38,17 @@ Long way:
 
 
 ### Usage
-Encrypt/Decrypt rust projects folder:
+Note: The program needs to be in the same folder as nuo.nuo and yek.yek. 
+Also, these two files need to have the same name in the example. 
+You can download them and then change their content using keys that you decide.
 
+Encrypt/Decrypt files/folders:    (encdec will dectect what you want to encrypt, no need for flags!)
+    
     encdec --help
+    
+    encdec encrypt /path/to/file
+    encdec decrypt /path/to/file
+    
     encdec encrypt /path/to/folder
     encdec decrypt /path/to/folder
     
