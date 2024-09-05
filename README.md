@@ -54,5 +54,18 @@ Encrypt/Decrypt files/folders:    (encdec will dectect what you want to encrypt,
     #Ecrypts/decrypts the file of the folder
     encdec encrypt /path/to/folder
     encdec decrypt /path/to/folder
-    
+
+###Some upgrades to be done
+
+Encrypts/decrypts a folder except a file
+
+    encdec encrypt path/to/folder -x file_name
+    encdec decrypt path/to/folder -x file_name
+
+Encrypts/decrypts a folder except a file type
+
+    encdec encrypt path/to/folder -xt .file_type
+    encdec decrypt path/to/folder -xt .file_type
+
+
 [![forthebadge](https://forthebadge.com/images/featured/featured-built-with-love.svg)](https://forthebadge.com)
