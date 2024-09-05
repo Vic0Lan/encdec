@@ -55,7 +55,7 @@ Encrypt/Decrypt files/folders:    (encdec will dectect what you want to encrypt,
     encdec encrypt /path/to/folder
     encdec decrypt /path/to/folder
 
-###Some upgrades to be done
+### Some upgrades to be done
 
 Encrypts/decrypts a folder except a file
 
