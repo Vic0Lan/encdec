@@ -1,5 +1,5 @@
 use cli::parse_arguments;
-use rusty_tests::start;
+use encdec::start;
 mod cli;
 
 //TODO:

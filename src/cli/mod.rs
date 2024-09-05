@@ -1,5 +1,5 @@
 use clap::{arg, command, value_parser, Command};
-use rusty_tests::Operation;
+use encdec::Operation;
 use std::path::PathBuf;
 
 pub fn parse_arguments() -> (PathBuf, Operation) {
@@ -25,12 +25,12 @@ pub fn parse_arguments() -> (PathBuf, Operation) {
             let path = sub_matches.get_one::<PathBuf>("PATH");
             println!("encdec encrypt was used, path is: {:?}", path);
 
-            (path.unwrap().into(), rusty_tests::Operation::Encrypt)
+            (path.unwrap().into(), Operation::Encrypt)
         }
         Some(("decrypt", sub_matches)) => {
             let path = sub_matches.get_one::<PathBuf>("PATH");
             println!("encdec decrypt was used, path is: {:?}", path);
-            (path.unwrap().into(), rusty_tests::Operation::Decrypt)
+            (path.unwrap().into(), Operation::Decrypt)
         }
         _ => unreachable!("Exhausted list of subcommands and subcommand_required prevents `None`"),
     }
