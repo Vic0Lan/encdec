@@ -45,15 +45,15 @@ You can download them and then change their content using keys that you decide.
 Encrypt/Decrypt files or folders:    (encdec will dectect what you want to encrypt, no need for flags!)
 
     #No need to tell what this command does
-    encdec --help
-
+    $ encdec --help
+ 
     #Encrypts/decrypts the file
-    encdec encrypt /path/to/file
-    encdec decrypt /path/to/file
+    $ encdec encrypt /path/to/file
+    $ encdec decrypt /path/to/file
 
-    #Ecrypts/decrypts the file of the folder
-    encdec encrypt /path/to/folder
-    encdec decrypt /path/to/folder
+    #Encrypts/decrypts the file of the folder
+    $ encdec encrypt /path/to/folder
+    $ encdec decrypt /path/to/folder
     
 Encrypts/decrypts a folder except a file
 
