@@ -1,5 +1,7 @@
 use cli::parse_arguments;
-use encdec::start;
+use rusty_tests::start;
+use rusty_tests::{read_nuo, read_yek};
+use std::process;
 mod cli;
 
 //TODO:
@@ -9,12 +11,21 @@ mod cli;
 //Take folder name then encrypt every file (optional add a format or file to be excluded)
 
 fn main() {
-    println!("Testing chacha");
+    println!("Encdec output:");
 
     //test_encrypt("Z/IMG_2918.JPG".as_ref());
 
-    // start(&PathBuf::from_str("Z").unwrap(), Operation::Decrypt);
+    let (path, op, path_to_exclude) = parse_arguments();
 
-    let (path, op) = parse_arguments();
-    start(&path, op);
+    if let Err(err) = read_yek() {
+        eprintln!("Error while checking yek: {}", err);
+        process::exit(1)
+    }
+
+    if let Err(err) = read_nuo() {
+        eprintln!("Error while checking nuo: {}", err);
+        process::exit(1)
+    }
+
+    start(&path, op, path_to_exclude);
 }
