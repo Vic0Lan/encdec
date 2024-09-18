@@ -54,14 +54,14 @@ Encrypt/Decrypt files or folders:    (encdec will dectect what you want to encry
     #Ecrypts/decrypts the file of the folder
     encdec encrypt /path/to/folder
     encdec decrypt /path/to/folder
-
-### Some upgrades to be done
-
+    
 Encrypts/decrypts a folder except a file
 
-    encdec encrypt path/to/folder -x file_name
-    encdec decrypt path/to/folder -x file_name
+    encdec encrypt -x path/to/folder file/to/exclude
+    encdec decrypt -x path/to/folder file/to/exclude
 
+
+### Some upgrades to be done
 Encrypts/decrypts a folder except a file type
 
     encdec encrypt path/to/folder -xt .file_type
