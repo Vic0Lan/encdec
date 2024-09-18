@@ -1,7 +1,7 @@
 [![forthebadge](https://forthebadge.com/images/badges/made-with-rust.svg)](https://forthebadge.com)
 
 # Encdec
-Simple CLI file encrypter written in Rust
+Simple CLI file ChaCha20poly1305 encrypter/decrypter written in Rust
 
 ## Getting Started
 
