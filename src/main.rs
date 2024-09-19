@@ -1,6 +1,6 @@
 use cli::parse_arguments;
-use rusty_tests::start;
-use rusty_tests::{read_nuo, read_yek};
+use encdec::start;
+use encdec::{read_nuo, read_yek};
 use std::process;
 mod cli;
 

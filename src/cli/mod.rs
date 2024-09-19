@@ -1,5 +1,5 @@
 use clap::{arg, command, value_parser, Arg, ArgAction, Command};
-use rusty_tests::Operation;
+use encdec::Operation;
 use std::{path::PathBuf, process};
 
 pub fn parse_arguments() -> (PathBuf, Operation, Option<PathBuf>) {
