@@ -72,7 +72,7 @@ pub fn start(path: &PathBuf, op: Operation, path_to_exclude: Option<PathBuf>) {
     }
 }
 
-fn read_and_do(file_path: PathBuf, op: Operation) {
+pub fn read_and_do(file_path: PathBuf, op: Operation) {
     let file = File::open(&file_path).unwrap_or_else(|err| {
         eprintln!(
             r"
@@ -89,11 +89,11 @@ fn read_and_do(file_path: PathBuf, op: Operation) {
     let key = read_yek().expect("Failed to read yek");
     let nonce = read_nuo().expect("Failed to read nuo");
 
-    let cypher = ChaCha20Poly1305::new(key.as_bytes().into());
+    let cypher = ChaCha20Poly1305::new(key.as_slice().into());
 
     match op {
         Operation::Encrypt => {
-            let encrypted_buf = encrypt(nonce.as_bytes(), &cypher, bytes).unwrap_or_else(|err| {
+            let encrypted_buf = encrypt(nonce.as_slice(), &cypher, bytes).unwrap_or_else(|err| {
                 eprintln!("Error happened during encryption {}", err);
                 process::exit(1);
             });
@@ -104,7 +104,7 @@ fn read_and_do(file_path: PathBuf, op: Operation) {
             );
         }
         Operation::Decrypt => {
-            let decrypted_buf = decrypt(nonce.as_bytes(), &cypher, bytes).unwrap_or_else(|err| {
+            let decrypted_buf = decrypt(nonce.as_slice(), &cypher, bytes).unwrap_or_else(|err| {
                 eprintln!("Error happened during decryption {}", err);
                 process::exit(1);
             });
@@ -126,7 +126,9 @@ fn encrypt(
     let mut buf: Vec<u8> = Vec::new();
     buf.extend_from_slice(&bytes);
 
-    let buf = cypher.encrypt(nonce.into(), buf.as_ref()).unwrap();
+    let buf = cypher
+        .encrypt(nonce.into(), buf.as_ref())
+        .expect("Had problem while encrypting");
 
     Ok(buf)
 }
@@ -140,26 +142,28 @@ fn decrypt(
     let mut buf: Vec<u8> = Vec::new();
     buf.extend_from_slice(&bytes);
 
-    let buf = cypher.decrypt(nonce.into(), buf.as_ref()).unwrap();
+    let buf = cypher
+        .decrypt(nonce.into(), buf.as_ref())
+        .expect("Had problem while decrypting");
     Ok(buf)
 }
 
-pub fn read_yek() -> Result<String, ioError> {
+pub fn read_yek() -> Result<Vec<u8>, ioError> {
     let mut file = File::open("yek.yek")?;
 
     let mut buf = String::new();
     file.read_to_string(&mut buf)?;
+    let buf = buf.trim();
 
-    buf.truncate(buf.len() - 1);
-    Ok(buf)
+    Ok(hex::decode(buf).expect("Fuck"))
 }
 
-pub fn read_nuo() -> Result<String, ioError> {
+pub fn read_nuo() -> Result<Vec<u8>, ioError> {
     let mut file = File::open("nuo.nuo")?;
 
     let mut buf = String::new();
     file.read_to_string(&mut buf)?;
+    let buf = buf.trim();
 
-    buf.truncate(buf.len() - 1);
-    Ok(buf)
+    Ok(hex::decode(buf).expect("Fuck"))
 }

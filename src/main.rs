@@ -2,6 +2,7 @@ use cli::parse_arguments;
 use encdec::start;
 use encdec::{read_nuo, read_yek};
 use std::process;
+
 mod cli;
 
 //TODO:
@@ -28,4 +29,21 @@ fn main() {
     }
 
     start(&path, op, path_to_exclude);
+
+    //Only for personal testing
+    // match read_yek() {
+    //     Ok(bytes) => {
+    //         println!("{:?}", bytes.as_slice());
+    //     }
+    //     Err(err) => eprintln!("err in yek: {err}"),
+    // }
+    //
+    // match read_nuo() {
+    //     Ok(bytes) => {
+    //         println!("{:?}", bytes.as_slice());
+    //     }
+    //     Err(err) => eprintln!("err in nuo {err}"),
+    // }
+    //
+    // read_and_do("Z/file_example.mov".into(), rusty_tests::Operation::Decrypt)
 }
