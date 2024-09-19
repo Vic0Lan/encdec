@@ -6,3 +6,4 @@ edition = "2021"
 [dependencies]
 chacha20poly1305 = "0.10.1"
 clap = { version = "4.5.16", features = ["derive", "cargo"] }
+hex = "0.4.3"
